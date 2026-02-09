@@ -1,0 +1,48 @@
+@import "../../styles/_mixins.scss";
+
+.item{
+  cursor: pointer;
+  background-color: var(--notice-color);
+  padding: 16px 32px;
+  border-radius: var(--medium-radius);
+  border: var(--notice-border-color);
+  @include center-flex;
+  justify-content: space-between;
+  &__title{
+    font-size: var(--h3-size);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &__subtitle{
+    opacity: 0.5;
+    max-width: 1200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &__time{
+      margin-right: 16px;
+    }
+  }
+  &:hover{
+    transition-duration: var(--animation-duration);
+    //background-color: #1d263a;
+    background-color: #3b3b3b;
+    transform: translateY(-5px);
+  }
+
+}
+.delete__icon__container{
+  width: 48px;
+  height: 100%;
+  @include center-flex;
+  &:hover{
+    transition-duration: var(--animation-duration);
+    transform: scale(1.3);
+    -webkit-user-drag: none;
+  }
+  &:active{
+    transition-duration: var(--animation-duration);
+    transform: scale(1);
+  }
+}

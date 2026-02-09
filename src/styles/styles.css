@@ -126,9 +126,23 @@ li {
 
 :root {
   --main-font: "NotoSans", sans-serif;
+  --p-size: 16px;
+  --h1-size: 56px;
+  --h2-size: 48px;
+  --h3-size: 24px;
+  --large-radius: 32px;
+  --medium-radius: 16px;
+  --small-radius: 8px;
+  --scroll-radius: 4px;
+  --notice-border-color: 3px solid #bec1c9;
+  --list-border-color: 1px solid #d7d2d2;
+  --list-color: #e7e7e7;
+  --scrollbar-color: #3b3b3b;
+  --thumb-color: #696969;
+  --notice-color: #10141e;
   --text-color: white;
   --bg-color: black;
-  --font-size: 16px;
+  --list-height: 690px;
   --animation-duration: 0.2s;
 }
 
@@ -155,7 +169,7 @@ li {
 }
 body {
   font-family: var(--main-font), sans-serif;
-  font-size: var(--font-size);
+  font-size: var(--p-size);
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.5;
