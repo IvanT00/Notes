@@ -1,20 +1,14 @@
-import type { Note, Notes } from "./initData.ts";
+import type { Note } from "./initData.ts";
+import {getNotes, saveNotes} from "./getNotesAndSave.ts";
 
-export const updateNote = (
+export const updateDate = (
     id: string,
     title: string,
-    description: string,
+    subtitle: string,
     newDate: string
 ): boolean => {
     try {
-        const notesString = localStorage.getItem("notes");
-
-        if (!notesString) {
-            console.error('No notes found in localStorage');
-            return false;
-        }
-
-        const notes: Notes = JSON.parse(notesString);
+        const notes = getNotes();
         const noteIndex = notes.findIndex((note: Note) => note.id === id);
 
         if (noteIndex === -1) {
@@ -23,26 +17,27 @@ export const updateNote = (
         }
 
         const existingNote = notes[noteIndex];
+        const updatedNote = { ...existingNote };
         let isChanged = false;
 
-        if (title !== existingNote.title) {
-            existingNote.title = title;
+        if (title.trim() !== updatedNote.title.trim()) {
+            updatedNote.title = title.trim();
             isChanged = true;
         }
 
-        if (description !== existingNote.description) {
-            existingNote.description = description;
+        if (subtitle.trim() !== updatedNote.description.trim()) {
+            updatedNote.description = subtitle.trim();
             isChanged = true;
         }
 
         if (isChanged) {
-            existingNote.time = newDate;
+            updatedNote.time = newDate;
+            notes[noteIndex] = updatedNote;
+            saveNotes(notes);
+            return true;
         }
 
-        notes[noteIndex] = existingNote;
-        localStorage.setItem('notes', JSON.stringify(notes));
-
-        return true;
+        return false;
     } catch (error) {
         console.error('Error updating note:', error);
         return false;

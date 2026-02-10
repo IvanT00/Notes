@@ -1,3 +1,5 @@
+import {getNotes, saveNotes} from "./getNotesAndSave.ts";
+
 export interface Note {
     id: string;
     title: string;
@@ -7,7 +9,7 @@ export interface Note {
 
 export type Notes = Note[];
 
-export const formatTime = (date: Date): string => {
+const formatTime = (date: Date): string => {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
@@ -21,7 +23,7 @@ export const formatDate = (date: Date): string => {
     return `${time} ${day}/${month}/${year}`;
 };
 
-export const createInitialNote = (): Note => {
+const createInitialNote = (): Note => {
     const now = new Date();
     return {
         id: crypto.randomUUID(),
@@ -33,27 +35,16 @@ export const createInitialNote = (): Note => {
 
 export const initData = (): Notes => {
     try {
-        const raw: string | null = localStorage.getItem("notes");
-
-        if (!raw || raw.trim() === "" || raw === "[]") {
+        const notes = getNotes();
+        if (notes.length === 0) {
             const initialNote = createInitialNote();
-            localStorage.setItem("notes", JSON.stringify([initialNote]));
-            return [initialNote];
+            const notesToSave = [initialNote];
+            saveNotes(notesToSave);
+            return notesToSave;
         }
-
-        const parsed = JSON.parse(raw);
-
-        if (!Array.isArray(parsed)) {
-            const initialNote = createInitialNote();
-            localStorage.setItem("notes", JSON.stringify([initialNote]));
-            return [initialNote];
-        }
-
-        return parsed;
+        return notes;
     } catch (error) {
         console.error('Initialization failed:', error);
-        const initialNote = createInitialNote();
-        localStorage.setItem("notes", JSON.stringify([initialNote]));
-        return [initialNote];
+        return [createInitialNote()];
     }
 };

@@ -50,6 +50,4 @@ const NotePage = () => {
             </div>
         </div>
     );
-};
-
-export default NotePage;
+};export default NotePage;

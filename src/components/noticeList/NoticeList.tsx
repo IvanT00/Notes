@@ -3,19 +3,26 @@ import NoticeItem from "../noticeItem/NoticeItem.tsx";
 import Panel from "../panel/Panel.tsx";
 import {useNavigate} from "react-router-dom";
 import type {Note, Notes} from "../../localStorage/initData.ts";
+import {useState} from "react";
+import {initData} from "../../localStorage/initData.ts";
+import {getNotes} from "../../localStorage/getNotesAndSave.ts";
 
-interface NoticeListProps {
-    data?: Notes;
-}
-
-const NoticeList = ({data}: NoticeListProps) => {
+const NoticeList = () => {
     const navigate = useNavigate();
+    const [notes, setNotes] = useState<Notes>(() => {
+        return initData();
+    });
+
+    const refreshNotes = () => {
+        const updatedNotes = getNotes();
+        setNotes(updatedNotes);
+    };
 
     return (
         <div className={classes.list}>
             <div className={classes.listCont}>
-                <Panel/>
-                { data && data.map((note:Note) => (
+                <Panel onNoteAdded={refreshNotes}/>
+                { notes && notes.map((note:Note) => (
                     <div
                         key={note.id}
                         onClick={() => navigate(`/notes/${note.id}`)}

@@ -2,10 +2,16 @@ import classes from './Panel.module.scss'
 import SearchInput from "../searchInput/SearchInput.tsx";
 import {addData} from "../../localStorage/addData.ts";
 
+interface PanelProps {
+    onNoteAdded?: () => void;
+}
 
-const Panel = () => {
+const Panel = ({onNoteAdded}: PanelProps) => {
     const handleAddNote = () =>{
         addData();
+        if (onNoteAdded) {
+            onNoteAdded();
+        }
     }
     return (
         <div className={classes.panel}>

@@ -1,33 +1,20 @@
-import {formatDate, type Note, type Notes} from "./initData.ts";
+import { formatDate } from "./initData.ts";
+import {getNotes, saveNotes} from "./getNotesAndSave.ts";
 
-export const addData = (): Note | null => {
+
+export const addData = (): string | null => {
     try {
+        const notes = getNotes();
         const now = new Date();
-        const newNote: Note = {
+        const newNote = {
             id: crypto.randomUUID(),
             title: 'Новая заметка',
             description: 'Нет дополнительного текста',
             time: formatDate(now),
         };
-
-        const stringNotes = localStorage.getItem("notes");
-        let notes: Notes = [];
-
-        if (stringNotes) {
-            try {
-                notes = JSON.parse(stringNotes);
-                if (!Array.isArray(notes)) {
-                    notes = [];
-                }
-            } catch {
-                notes = [];
-            }
-        }
-
         notes.push(newNote);
-        localStorage.setItem("notes", JSON.stringify(notes));
-
-        return newNote;
+        saveNotes(notes);
+        return newNote.id;
     } catch (error) {
         console.error('Error adding note:', error);
         return null;
