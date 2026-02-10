@@ -5,8 +5,10 @@ import NoticeList from "./components/noticeList/NoticeList.tsx";
 const App = () => {
     return (
         <div className='container'>
-            <h1 className={classes.mainTitle}>Заметки</h1>
-            <NoticeList/>
+            <div className={classes.app}>
+                <h1 className={classes.app__mainTitle}>Заметки</h1>
+                <NoticeList/>
+            </div>
         </div>
     );
 };

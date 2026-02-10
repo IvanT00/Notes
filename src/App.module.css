@@ -1,4 +1,9 @@
-.mainTitle {
+.app {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+.app__mainTitle {
   font-size: var(--h1-size);
   text-align: center;
   margin-top: 32px;

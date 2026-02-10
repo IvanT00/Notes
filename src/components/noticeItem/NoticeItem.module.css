@@ -1,4 +1,5 @@
 .item {
+  user-select: none;
   cursor: pointer;
   background-color: var(--notice-color);
   padding: 16px 32px;
@@ -46,6 +47,11 @@
 .delete__icon__container:active {
   transition-duration: var(--animation-duration);
   transform: scale(1);
+  pointer-events: none;
+}
+
+.delete__icon {
+  -webkit-user-drag: none;
 }
 
 /*# sourceMappingURL=NoticeItem.module.css.map */

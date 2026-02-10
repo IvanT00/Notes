@@ -1,0 +1,39 @@
+@import "../../styles/_mixins.scss";
+
+.panel{
+  padding-block: 16px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  align-items: center;
+  &__addIcon{
+    cursor: pointer;
+    -webkit-user-drag: none;
+    &:hover{
+      filter: brightness(0.5);
+      background-color: #b5b5d5;
+    }
+  }
+  &__add__container{
+    width: 64px;
+    height: 64px;
+    @include center-flex;
+    cursor: pointer;
+    &:hover{
+      svg path:first-child{
+        transition-duration: var(--animation-duration);
+        fill: #07500a;
+      }
+    }
+    &:active{
+      svg path:first-child{
+        transform: scale(0.9);
+      }
+    }
+  }
+}
+
+svg path{
+  fill: black;
+}
+

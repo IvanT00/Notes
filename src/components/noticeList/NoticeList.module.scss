@@ -1,8 +1,6 @@
-@import "../../styles/_mixins.scss";
-
 .list{
-  margin-top: 32px;
   background: var(--list-color);
+  width: 100%;
   box-shadow:
           inset 6px 6px 15px rgba(0, 0, 0, 0.8),
           inset -6px -6px 15px rgba(0, 0, 0, 0.8);
@@ -34,18 +32,4 @@
   background-color: var(--thumb-color);
   border-radius: var(--small-radius);
 }
-.add__container{
-  position: absolute;
-  width: 150px;
-  height: 120px;
-  background-color: var(--list-color);
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-top-right-radius: var(--large-radius);
-  border-top-left-radius: var(--large-radius);
-  border: 3px solid #bec1c9;
-  border-bottom: none;
-  @include center-flex;
 
-}

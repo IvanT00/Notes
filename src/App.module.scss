@@ -1,8 +1,14 @@
-.mainTitle{
-  font-size: var(--h1-size);
-  text-align: center;
-  margin-top: 32px;
-  user-select: none;
+.app{
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  &__mainTitle{
+    font-size: var(--h1-size);
+    text-align: center;
+    margin-top: 32px;
+    user-select: none;
+  }
 }
+
 
 

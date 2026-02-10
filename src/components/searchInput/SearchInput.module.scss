@@ -1,0 +1,24 @@
+.search{
+  &__container{
+    position: relative;
+    width: 33%;
+    &::after{
+      cursor: text;
+      content: url("../../assets/icons/loupeIcon.svg");
+      position: absolute;
+      top: 0;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  &__input{
+    border-radius: var(--small-radius);
+    padding: 8px 32px 8px 16px;
+    position: relative;
+    width: 100%;
+    &::placeholder{
+      user-select: none;
+    }
+  }
+}

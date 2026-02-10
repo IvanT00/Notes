@@ -1,0 +1,36 @@
+.panel {
+  padding-block: 16px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  align-items: center;
+}
+.panel__addIcon {
+  cursor: pointer;
+  -webkit-user-drag: none;
+}
+.panel__addIcon:hover {
+  filter: brightness(0.5);
+  background-color: #b5b5d5;
+}
+.panel__add__container {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.panel__add__container:hover svg path:first-child {
+  transition-duration: var(--animation-duration);
+  fill: #07500a;
+}
+.panel__add__container:active svg path:first-child {
+  transform: scale(0.9);
+}
+
+svg path {
+  fill: black;
+}
+
+/*# sourceMappingURL=Panel.module.css.map */
