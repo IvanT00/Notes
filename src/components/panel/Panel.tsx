@@ -1,12 +1,16 @@
 import classes from './Panel.module.scss'
 import SearchInput from "../searchInput/SearchInput.tsx";
+import {addData} from "../../localStorage/addData.ts";
 
 
 const Panel = () => {
+    const handleAddNote = () =>{
+        addData();
+    }
     return (
         <div className={classes.panel}>
             <SearchInput/>
-            <div className={classes.panel__add__container} title='Add new notice'>
+            <div className={classes.panel__add__container} onClick={handleAddNote} title='Add new notice'>
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="32.000000pt" height="32.000000pt" viewBox="0 0 512.000000 512.000000"
                      preserveAspectRatio="xMidYMid meet">

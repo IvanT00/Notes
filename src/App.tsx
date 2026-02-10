@@ -1,15 +1,17 @@
-import classes from './App.module.scss'
 import './styles/_globals.scss'
-import NoticeList from "./components/noticeList/NoticeList.tsx";
+import {BrowserRouter, Route, Routes} from "react-router";
+import MainPage from "./pages/mainPage/MainPage.tsx";
+import NotePage from "./pages/notePage/NotePage.tsx";
+
 
 const App = () => {
     return (
-        <div className='container'>
-            <div className={classes.app}>
-                <h1 className={classes.app__mainTitle}>Заметки</h1>
-                <NoticeList/>
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<MainPage/>}/>
+                <Route path="/notes/:id" element={<NotePage/>}/>
+            </Routes>
+        </BrowserRouter>
     );
 };
 

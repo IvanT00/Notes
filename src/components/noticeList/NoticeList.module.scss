@@ -22,14 +22,15 @@
 
 ::-webkit-scrollbar{
   background-color: var(--scrollbar-color);
-  border-radius: var(--small-radius);
+  border-radius: var(--scroll-radius);
   scrollbar-width: thin;
   width: 10px;
+
 }
 
 
 ::-webkit-scrollbar-thumb{
   background-color: var(--thumb-color);
-  border-radius: var(--small-radius);
+  border-radius: var(--scroll-radius);
 }
 

@@ -21,7 +21,7 @@
     cursor: pointer;
     &:hover{
       svg path:first-child{
-        transition-duration: var(--animation-duration);
+        transition-duration: 0.3s;
         fill: #07500a;
       }
     }

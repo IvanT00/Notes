@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 .panel__add__container:hover svg path:first-child {
-  transition-duration: var(--animation-duration);
+  transition-duration: 0.3s;
   fill: #07500a;
 }
 .panel__add__container:active svg path:first-child {
