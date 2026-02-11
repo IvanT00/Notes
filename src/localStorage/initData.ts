@@ -1,10 +1,11 @@
-import {getNotes, saveNotes} from "./getNotesAndSave.ts";
+import { getNotes, saveNotes } from './getNotesAndSave.ts';
 
 export interface Note {
     id: string;
     title: string;
     description: string;
     time: string;
+    onDelete?: () => void;
 }
 
 export type Notes = Note[];
@@ -27,9 +28,9 @@ const createInitialNote = (): Note => {
     const now = new Date();
     return {
         id: crypto.randomUUID(),
-        title: "Новая заметка",
-        description: "Нет дополнительного текста",
-        time: formatDate(now)
+        title: 'Новая заметка',
+        description: 'Нет дополнительного текста',
+        time: formatDate(now),
     };
 };
 

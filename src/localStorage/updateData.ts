@@ -1,5 +1,5 @@
-import type { Note } from "./initData.ts";
-import {getNotes, saveNotes} from "./getNotesAndSave.ts";
+import type { Note } from './initData.ts';
+import { getNotes, saveNotes } from './getNotesAndSave.ts';
 
 export const updateDate = (
     id: string,

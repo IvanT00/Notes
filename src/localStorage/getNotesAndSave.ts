@@ -1,4 +1,4 @@
-import type {Notes} from "./initData.ts";
+import type { Notes } from './initData.ts';
 
 export const getNotes = (): Notes => {
     try {

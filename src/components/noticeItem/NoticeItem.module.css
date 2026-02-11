@@ -2,9 +2,18 @@
   user-select: none;
   cursor: pointer;
   background-color: var(--notice-color);
-  padding: 16px 32px;
+  padding-right: 32px;
   border-radius: var(--medium-radius);
   border: var(--notice-border-color);
+}
+.item__info__container {
+  width: 100%;
+}
+.item__info {
+  width: 100%;
+  padding: 16px 32px;
+}
+.item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,6 +61,11 @@
 
 .delete__icon {
   -webkit-user-drag: none;
+}
+
+.delete {
+  display: flex;
+  height: 100%;
 }
 
 /*# sourceMappingURL=NoticeItem.module.css.map */

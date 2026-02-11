@@ -1,6 +1,5 @@
-import { formatDate } from "./initData.ts";
-import {getNotes, saveNotes} from "./getNotesAndSave.ts";
-
+import { formatDate } from './initData.ts';
+import { getNotes, saveNotes } from './getNotesAndSave.ts';
 
 export const addData = (): string | null => {
     try {

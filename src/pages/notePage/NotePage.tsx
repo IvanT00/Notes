@@ -1,53 +1,102 @@
-import classes from './NotePage.module.scss'
-import {useState} from "react";
-import {formatDate} from "../../localStorage/initData.ts";
-import {useNavigate} from "react-router-dom";
-import {updateDate} from "../../localStorage/updateData.ts";
+import classes from './NotePage.module.scss';
+import { useState, useEffect } from 'react';
+import { formatDate } from '../../localStorage/initData.ts';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateDate } from '../../localStorage/updateData.ts';
+import { useNotes } from '../../hooks/useNotes.ts';
+import { getNotes } from '../../localStorage/getNotesAndSave.ts';
+import type { Note } from '../../localStorage/initData.ts';
+import * as React from 'react';
 
 const NotePage = () => {
-
-    const [title, setTitle] = useState<string>('')
-    const [subtitle, setSubtitle] = useState<string>('')
+    const { id } = useParams<{ id: string }>();
+    const [title, setTitle] = useState<string>('');
+    const [subtitle, setSubtitle] = useState<string>('');
+    const { refreshNotes } = useNotes();
+    const [titleIsFull, setTitleIsFull] = useState<boolean>(false);
+    const [subtitleIsFull, setSubTitleIsFull] = useState<boolean>(false);
 
     const now = new Date();
     const newData = formatDate(now);
     const navigate = useNavigate();
 
-    const handleSave = () =>{
-        const path = window.location.pathname;
-        const parts = path.split('/');
-        const notesIndex = parts.indexOf('notes');
+    const titleLimit = 100;
+    const subtitleLimit = 5000;
 
-        if (notesIndex !== -1 && parts.length > notesIndex + 1) {
-            const id = parts[notesIndex + 1];
-            updateDate(id, title, subtitle, newData);
-        }else{
-            return null;
+    useEffect(() => {
+        if (id) {
+            const notes = getNotes();
+            const note = notes.find((note: Note) => note.id === id);
+
+            if (note) {
+                setTitle(note.title);
+                setSubtitle(note.description);
+            }
         }
+    }, [id]);
 
-        navigate(`/`);
-    }
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value.length <= titleLimit) {
+            setTitle(value);
+        } else {
+            setTitleIsFull(true);
+        }
+    };
+
+    const handleSubTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        if (value.length <= subtitleLimit) {
+            setSubtitle(value);
+        } else {
+            setSubTitleIsFull(true);
+        }
+    };
+
+    const handleSave = () => {
+        if (id) {
+            updateDate(id, title, subtitle, newData);
+            refreshNotes();
+            navigate('/');
+        }
+    };
 
     return (
         <div className={classes.list}>
             <div className={classes.listCont}>
                 <div className={classes.saveButton__container}>
-                    <button className={classes.saveButton} onClick={handleSave}>Сохранить</button>
+                    {titleIsFull && (
+                        <span style={{ color: 'red', marginLeft: '16px' }}>
+              Превышен лимит символов для заголовка!
+            </span>
+                    )}
+                    {subtitleIsFull && (
+                        <span style={{ color: 'red', marginLeft: '16px' }}>
+              Превышен лимит символов для основного текста!
+            </span>
+                    )}
+                    {!subtitleIsFull && !titleIsFull ? (
+                        <button className={classes.saveButton} onClick={handleSave}>
+                            Сохранить
+                        </button>
+                    ) : null}
                 </div>
                 <input
-                    type='text'
+                    type="text"
                     className={classes.listCont__title}
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={handleTitleChange}
                     placeholder={'Заголовок'}
                 />
                 <textarea
                     className={classes.listCont__subtitle}
                     value={subtitle}
-                    onChange={(e) => setSubtitle(e.target.value)}
+                    onChange={handleSubTitleChange}
                     placeholder={'Текст заметки'}
                 />
             </div>
         </div>
     );
-};export default NotePage;
+};
+
+export default NotePage;
